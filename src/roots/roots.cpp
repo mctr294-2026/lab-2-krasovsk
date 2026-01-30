@@ -68,12 +68,13 @@ bool secant(std::function<double(double)> f, double a, double b, double c, doubl
     denom = (f(b) - f(c));
     
     double d = c - f(c) * ((b-c)/denom);
-    for (int i = 0; i < 1e6; i++) {
+
+    while (std::abs(d-c) > 1e-6) {
         b = c;
         c = d;
         denom = (f(b) - f(c));
         d = c - f(c) * ((b-c) / denom);
     }
-    *root = d;
+    *root = c;
     return true;
 }
